@@ -1,0 +1,21 @@
+---
+# tasks file for disk_usage_monitor
+
+- name: Check the / file system usage
+  shell: df -h / |awk ' { print $5 } ' |grep -v Use
+  register: fs_info
+
+- set_fact:
+    root_fs_used: "{{ fs_info.stdout }}" 
+
+- name: Send mail to team
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "{{ smail_id }}"
+    password: "{{ mail_pass }}"
+    to: "{{ rmail_id }}"
+    subject: Root FileSystem Usage Report
+    body: "{{ lookup('template', 'mail_body.j2') }}"
+  delegate_to: localhost
+  run_once: yes

@@ -1,0 +1,3 @@
+{% for inventory_hostname in groups['linux'] %}
+Root FileSystem usage on {{ hostvars[inventory_hostname]['inventory_hostname'] }} is: {{ hostvars[inventory_hostname]['root_fs_used'] }}
+{% endfor %}

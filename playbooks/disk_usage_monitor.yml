@@ -1,0 +1,9 @@
+---
+- name: Check the '/' file system usage and send mail
+  hosts: linux
+  gather_facts: no
+  ignore_errors: yes
+  roles:
+    - disk_usage_monitor
+
+...
