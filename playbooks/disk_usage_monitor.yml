@@ -4,6 +4,6 @@
   gather_facts: no
   ignore_errors: yes
   roles:
-    - disk_usage_monitor
+    - roles/disk_usage_monitor
 
 ...
