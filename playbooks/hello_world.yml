@@ -6,5 +6,5 @@
   tasks:
   - name: Welcome message
     debug:
-      msg: 'Hello World'
+      msg: '{{ var1 }}'
 ...
