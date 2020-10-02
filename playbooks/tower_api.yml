@@ -26,6 +26,7 @@
     vars:
       cred_body: {
                 "credentials": "[{{ cred_id }}]"
+                }
     uri:
       url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/14/launch"
       method: POST
