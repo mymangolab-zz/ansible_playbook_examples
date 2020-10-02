@@ -14,5 +14,8 @@
       status_code: 200,201,404,401
       validate_certs: no
     delegate_to: localhost
-     
+    register: cred_info
+    
+   
+  - debug: var=cred_info
       
