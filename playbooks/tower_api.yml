@@ -9,7 +9,7 @@
       url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/credentials/?name=lab"
       method: GET
       force_basic_auth: yes
-      user: "{{ lookup('env', 'TOWER_USERNAME') }}"
+      user: "{{ lookup('env', 'TOWER_USENAME') }}"
       password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
       status_code: 200,201,404,401
       validate_certs: no
