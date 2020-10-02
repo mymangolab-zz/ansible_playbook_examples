@@ -1,6 +1,6 @@
 ---
 - name: Lauch job template with API
-  hosts: lab
+  hosts: linux
   gather_facts: no
   ignore_errors: yes
   tasks:
