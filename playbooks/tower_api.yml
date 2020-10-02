@@ -28,7 +28,7 @@
                 "credentials": "[{{ cred_id }}]"
                 }
     uri:
-      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/14/launch"
+      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/14/launch/"
       method: POST
       force_basic_auth: yes
       user: "{{ lookup('env', 'TOWER_USENAME') }}"
