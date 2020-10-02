@@ -18,4 +18,24 @@
     
    
   - debug: var=cred_info.json.results[0].id
+  - set_fact:
+      cred_id: "{{ cred_info.json.results[0].id }}"
+  
+  
+  - name: launch th job template
+    vars:
+      cred_body: {
+                "credentials": "[{{ cred_id }}]"
+    uri:
+      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/14/launch"
+      method: POST
+      force_basic_auth: yes
+      user: "{{ lookup('env', 'TOWER_USENAME') }}"
+      password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+      status_code: 200,201,404,401
+      validate_certs: no
+      body_format: json
+      body: "{{ cred_body }}"
+    delegate_to: localhost
+    register: cred_info
       
