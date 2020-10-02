@@ -17,5 +17,5 @@
     register: cred_info
     
    
-  - debug: var=cred_info
+  - debug: var=cred_info.json.results[0].id
       
