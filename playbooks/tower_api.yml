@@ -2,7 +2,7 @@
 - name: Lauch job template with API
   hosts: lab
   gather_facts: no
-  ignore_error: yes
+  ignore_errors: yes
   tasks:
   - name: Fetch the cred id
     uri:
