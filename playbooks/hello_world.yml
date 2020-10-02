@@ -6,5 +6,5 @@
   tasks:
   - name: Welcome message
     debug:
-      msg: '{{ var1 }}'
+      msg: "{{ lookup('env', 'TOWER_INSTANCE') }} and {{ lookup('env', 'TOWER_USERNAME') }} and {{ lookup('env', 'TOWER_PASSWORD') }}"
 ...
