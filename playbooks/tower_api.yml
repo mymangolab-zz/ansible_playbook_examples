@@ -49,6 +49,9 @@
     vars:
       cred_body: {
         "credentials": "[{{ cred_id }}]"
+        "extra_vars": {
+                     "message": "Welcome to AWX API Session"
+                     }
       }
     uri:
       url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/{{ template_id }}/launch/"
