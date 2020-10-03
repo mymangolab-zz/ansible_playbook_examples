@@ -48,7 +48,7 @@
   - name: Launch job template
     vars:
       cred_body: {
-        "credentials": "[{{ cred_id }}]"
+        "credentials": "[{{ cred_id }}]",
         "extra_vars": {
                      "message": "Welcome to AWX API Session"
                      }
