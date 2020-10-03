@@ -43,4 +43,19 @@
   - set_fact:
       cred_id: "{{ cred_info.json.results[0].id }}"
       
+  ################################ Launch job template ################################
+  
+  - name: Fetch the Cred ID
+    #vars:
+    #  cred_name: 'lab'
+    uri:
+      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/{{ template_id }}/launch/
+      method: POST
+      force_basic_auth: yes
+      user: "{{ lookup('env', 'TOWER_USENAME') }}"
+      password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+      status_code: 200,201,404,301
+      validate_certs: false
+  
+      
   
