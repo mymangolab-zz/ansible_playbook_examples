@@ -1,1 +1,17 @@
-
+- name: Calling Tower API 
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  ignore_errors: yes
+  tasks:
+  - name: Fetch the job template ID
+    vars:
+      template_name: 'Create_file'
+    uri:
+      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/?name={{ template_name }}"
+      method: GET
+      force_bsic_auth: yes
+      user: "{{ lookup('env', 'TOWER_USENAME') }}"
+      password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+      status_code: 200,201,404,301
+      validate_certs: false
