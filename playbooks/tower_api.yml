@@ -17,4 +17,4 @@
       validate_certs: false
     register: job_template
     
-  - debug: var=job_template
+  - debug: var=job_template.json.results[0].id
