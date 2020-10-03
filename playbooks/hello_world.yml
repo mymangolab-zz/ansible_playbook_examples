@@ -8,6 +8,10 @@
     debug:
       msg: "Server name is {{ inventory_hostname }}"
       
+  - name: print welcome message
+    debug:
+      msg: "{{ message }}"
+      
   - name: Create hello.txt
     file:
       path: /tmp/hello.txt
