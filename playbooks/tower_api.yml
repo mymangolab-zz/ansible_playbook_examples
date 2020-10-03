@@ -46,8 +46,10 @@
   ################################ Launch job template ################################
   
   - name: Launch job template
-    #vars:
-    #  cred_name: 'lab'
+    vars:
+      cred_body: {
+        "credentials": "[{{ cred_id }}]"
+      }
     uri:
       url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/{{ template_id }}/launch/"
       method: POST
@@ -56,6 +58,8 @@
       password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
       status_code: 200,201,404,301
       validate_certs: false
+      body_format: json
+      body: "{{ cred_body }}"
   
       
   
