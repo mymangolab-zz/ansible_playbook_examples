@@ -45,11 +45,11 @@
       
   ################################ Launch job template ################################
   
-  - name: Fetch the Cred ID
+  - name: Launch job template
     #vars:
     #  cred_name: 'lab'
     uri:
-      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/{{ template_id }}/launch/
+      url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/{{ template_id }}/launch/"
       method: POST
       force_basic_auth: yes
       user: "{{ lookup('env', 'TOWER_USENAME') }}"
