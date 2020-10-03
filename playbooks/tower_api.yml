@@ -10,7 +10,7 @@
     uri:
       url: "{{ lookup('env', 'TOWER_INSTANCE') }}/api/v2/job_templates/?name={{ template_name }}"
       method: GET
-      force_bsic_auth: yes
+      force_basic_auth: yes
       user: "{{ lookup('env', 'TOWER_USENAME') }}"
       password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
       status_code: 200,201,404,301
