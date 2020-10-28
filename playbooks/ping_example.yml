@@ -1,0 +1,27 @@
+---
+- name: Ping test
+  hosts: lab
+  ignore_errors: yes
+  gather_facts: no
+  ignore_unreachable: yes
+  tasks:
+  - name: Ping
+    ping:
+      data: ping_success
+    register: ping_result
+    retries: 3
+    delay: 10
+    until: ping_result.ping == "ping_success"
+
+  - set_fact:
+      ping_status: 'ping success'
+    when: ping_result.ping is defined and ping_result.ping == "ping_success"
+
+  - set_fact:
+      ping_status: 'ping failed'
+    when: ping_result.unreachable is defined and ping_result.unreachable == true
+
+  - name: final ping status
+    debug:
+      msg: "{{ ping_status }}"
+...
