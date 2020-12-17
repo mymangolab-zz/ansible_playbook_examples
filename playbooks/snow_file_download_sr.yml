@@ -1,0 +1,71 @@
+---
+# Download the file from SNOW SR
+- name: Download the file from SNOW SR
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  ignore_errors: yes
+
+  vars_files: ./snow_vars.yml
+
+  tasks:
+  - name: Collect Sys-ID
+    uri:
+      url: "https://snow.com/api/now/table/sc_request?number={{ sr_number }}&sysparm_fileds=sys_id&sysparm_limit=1"
+      method: GET
+      user: "{{ snow_user }}"
+      pasword: "{{ snow_password }}"
+      headers:
+        Content-Type: application/json
+      force_basic_auth: yes
+      status_code: 200,201,404
+      validate_certs: no
+      timeout: 60
+      return_content: no
+      register: collect_sysid
+      retries: 3
+      delay: 10
+      until: collect_sysid.status != -1
+
+  - set_fact:
+      sys_id: "{{ collect_sysid.json.result[0].sys_id }}"
+
+  - name: Collect file download link
+    uri:
+      url: "https://snow.com/api/now/attachment?sysparm_query=table_sys_id={{ sys_id }}"
+      method: GET
+      user: "{{ snow_user }}"
+      pasword: "{{ snow_password }}"
+      headers:
+        Content-Type: application/json
+      force_basic_auth: yes
+      status_code: 200,201,404
+      validate_certs: no
+      timeout: 60
+      return_content: no
+      register: collect_downloadlink
+      retries: 3
+      delay: 10
+      until: collect_downloadlink.status != -1
+
+  - set_fact:
+      download_link: "{{ collect_downloadlink.json.result[0].download_link }}"
+
+  - name: Downloading the file
+    get_url:
+      url: "{{ download_link }}"
+      dest: /tmp/test.txt
+      user: "{{ snow_user }}"
+      pasword: "{{ snow_password }}"
+      headers:
+        Content-Type: application/json
+      force_basic_auth: yes
+      status_code: 200,201,404
+      validate_certs: no
+      timeout: 60
+      return_content: no
+      register: download_file
+      retries: 3
+      delay: 10
+      until: download_file.status != -1
+    
